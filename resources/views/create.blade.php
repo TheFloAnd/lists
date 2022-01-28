@@ -17,11 +17,7 @@
     <main>
         @if ($message = Session::get('error'))
             <div class="alert alert-danger alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span>
-                        <i class="mdi mdi-close"></i>
-                    </span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <div class="media">
                     <div class="alert-left-icon-big">
                         <span><i class="mdi mdi-help-circle-outline"></i></span>

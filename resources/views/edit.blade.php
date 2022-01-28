@@ -15,6 +15,20 @@
 
 <body class="container-fluid">
     <main>
+@if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="media">
+                <div class="alert-left-icon-big">
+                    <span><i class="mdi mdi-help-circle-outline"></i></span>
+                </div>
+                <div class="media-body">
+                    <h6 class="mt-1 mb-2">{{ __('Fehler') }}</h6>
+                    <p class="mb-0">{{ $message }}</p>
+                </div>
+            </div>
+        </div>
+        @endif
         <article class="row g-3">
             <section class="col-12">
                 <div class="card">
@@ -76,7 +90,7 @@
                                     <div class="col-10">
                                         <div class="form-floating">
                                             <input type="text" class="form-control @error('usage') is-invalid @enderror"
-                                                value="{{ old('usage') }}" name="usage" id="usage"
+                                                value="{{ old('usage') ?? $item->usage }}" name="usage" id="usage"
                                                 placeholder="{{ __('Benutzung') }}" require />
 
                                             @error('usage')
@@ -103,7 +117,7 @@
                                                             id="basic-addon1">192.168.178.</span>
                                                         <input type="number" min="1"
                                                             class="form-control @error('ip-address') is-invalid @enderror"
-                                                            value="{{ substr($item->ip, 12) ?? old('ip-address') }}"
+                                                            value="{{ old('ip-address') ?? substr($item->ip, 12) }}"
                                                             name="ip-address" id="ip-address"
                                                             placeholder="{{ __('Please enter a valid IP address') }}"
                                                             require />
@@ -125,7 +139,7 @@
                                                         <span class="input-group-text" id="basic-addon1">:</span>
                                                         <input type="number" min="0"
                                                             class="form-control @error('port') is-invalid @enderror"
-                                                            value="{{ $item->port[1] ?? old('port') }}" name="ip"
+                                                            value="{{ old('port') ?? $item->port }}" name="ip"
                                                             id="port" placeholder="Port" />
 
                                                         @error('port')
@@ -176,9 +190,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('Löschen') }}</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal">
-                        <span>×</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     {{$txt ?? 'Wollen sie den Eintrag wirklich Löschen?'}}

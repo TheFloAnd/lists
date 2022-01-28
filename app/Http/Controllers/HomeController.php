@@ -59,21 +59,21 @@ class HomeController extends Controller
     {
         $validated = $request->validated();
 
-        if(!Home::where('ip', '192.168.178.'.$request->input('ip-address'))){
+        if (!Home::where('ip', '192.168.178.' . $request->input('ip-address'))) {
             return redirect()->route('create')
                 ->with('error', 'Die IP-Adresse existiert bereits!');
         }
 
-        if($request->has('web_based')){
+        if ($request->has('web_based')) {
             $web_based = 1;
-        }else{
+        } else {
             $web_based = 0;
         }
         Home::insert([
             'name' => $request->input('name'),
             'web_based' => $web_based,
             'usage' => $request->input('usage'),
-            'ip' => '192.168.178.'.$request->input('ip-address'),
+            'ip' => '192.168.178.' . $request->input('ip-address'),
             'port' => $request->input('port'),
         ]);
         return redirect()->route('home.index');
@@ -82,17 +82,23 @@ class HomeController extends Controller
     public function update(HomeFormRequest $request, $id)
     {
         $validated = $request->validated();
+        if (Home::where('ip', '192.168.178.' . $request->input('ip-address')) != Home::find($id)->ip) {
+            if (!Home::where('ip', '192.168.178.' . $request->input('ip-address'))) {
+                return redirect()->route('create')
+                    ->with('error', 'Die IP-Adresse existiert bereits!');
+            }
+        }
 
-        if($request->has('web_based')){
+        if ($request->has('web_based')) {
             $web_based = 1;
-        }else{
+        } else {
             $web_based = 0;
         }
         Home::find($id)->update([
             'name' => $request->input('name'),
             'web_based' => $web_based,
             'usage' => $request->input('usage'),
-            'ip' => '192.168.178.'.$request->input('ip-address'),
+            'ip' => '192.168.178.' . $request->input('ip-address'),
             'port' => $request->input('port'),
         ]);
         return redirect()->route('home.index');

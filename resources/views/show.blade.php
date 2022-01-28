@@ -39,7 +39,7 @@
                                         @endphp
                                         <input type="checkbox" role="switch"
                                             class="form-check-input @error('name') is-invalid @enderror"
-                                            value="{{ old('web_based') }}" name="web_based" id="web_based"
+                                            name="web_based" id="web_based"
                                             placeholder="{{ __('web_based') }}" {{ $checked }} />
 
                                         @error('web_based')
@@ -56,7 +56,7 @@
                                 <div class="col-10">
                                     <div class="form-floating">
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            value="{{ $item->name ?? old('name') }}" name="name" id="name"
+                                            value="{{ $item->name }}" name="name" id="name"
                                             placeholder="{{ __('Name') }}" require readonly />
 
                                         @error('name')
@@ -73,7 +73,7 @@
                                 <div class="col-10">
                                     <div class="form-floating">
                                         <input type="text" class="form-control @error('usage') is-invalid @enderror"
-                                            value="{{ old('usage') }}" name="usage" id="usage"
+                                            value="{{ $item->usage }}" name="usage" id="usage"
                                             placeholder="{{ __('Benutzung') }}" require readonly />
 
                                         @error('usage')
@@ -99,7 +99,7 @@
                                                     <span class="input-group-text" id="basic-addon1">192.168.178.</span>
                                                     <input type="text" min="1"
                                                         class="form-control @error('ip-address') is-invalid @enderror"
-                                                        value="{{ substr($item->ip, 12) ?? old('ip-address') }}"
+                                                        value="{{ substr($item->ip, 12) }}"
                                                         name="ip-address" id="ip-address"
                                                         placeholder="{{ __('Please enter a valid IP address') }}"
                                                         require readonly />
@@ -121,7 +121,7 @@
                                                     <span class="input-group-text" id="basic-addon1">:</span>
                                                     <input type="number" min="0"
                                                         class="form-control @error('port') is-invalid @enderror"
-                                                        value="{{ $item->port ?? old('port') }}" name="ip" id="port"
+                                                        value="{{ $item->port }}" name="ip" id="port"
                                                         placeholder="Port" readonly />
 
                                                     @error('port')

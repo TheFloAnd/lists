@@ -38,26 +38,51 @@
                                             {{ __('Name') }}
                                         </th>
                                         <th scope="col">
+                                            {{ __('Benutzung') }}
+                                        </th>
+                                        <th scope="col">
                                             {{ __('IP') }}
                                         </th>
                                         <th scope="col">
                                             {{ __('Port') }}
                                         </th>
+                                        <th style="width: 2.5%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($host as $row)
-                                        <tr onclick="window.open('http://{{ $row->ip }}{{ $row->port ?? '' }}')">
-                                            <td>
-                                                {{ $row->name }}
-                                            </td>
-                                            <td>
+                                    {{-- <tr onclick="window.open('http://{{ $row->ip }}{{ $row->port ?? '' }}')"> --}}
+                                    <tr>
+                                        <td>
+                                            {{ $row->name }}
+                                        </td>
+                                        <td>
+                                            {{ $row->usage }}
+                                        </td>
+                                        <td>
+                                            @if ($row->web_based == 1)
+                                                @if($row->port == '443')
+                                                    <a href="https://{{ $row->ip }}" target="_blank">
+                                                        {{ $row->ip }}
+                                                    </a>
+                                                @else
+                                                    <a href="http://{{ $row->ip }}:{{ $row->port }}" target="_blank">
+                                                        {{ $row->ip }}
+                                                    </a>
+                                                @endif
+                                            @else
                                                 {{ $row->ip }}
-                                            </td>
-                                            <td>
-                                                {{ $row->port }}
-                                            </td>
-                                        </tr>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{ $row->port }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('show', $row->id) }}">
+                                                {{ __('Anzeigen') }}
+                                            </a>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>

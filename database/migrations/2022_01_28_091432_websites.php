@@ -16,10 +16,12 @@ class Websites extends Migration
         Schema::create('websites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('web_based');
+            $table->string('usage')->nullable();
             $table->string('ip')->unique();
             $table->string('port')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 

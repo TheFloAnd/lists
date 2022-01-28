@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::get('/hinzufügen', [App\Http\Controllers\HomeController::class, 'create'])->name('create');
-Route::get('/bearbeiten/{id}', [App\Http\Controllers\HomeController::class, 'create'])->name('edit');
+Route::get('/bearbeiten/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('edit');
+Route::get('/anzeigen/{id}', [App\Http\Controllers\HomeController::class, 'show'])->name('show');
 Route::resource('home', App\Http\Controllers\HomeController::class);
